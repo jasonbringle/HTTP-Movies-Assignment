@@ -52,6 +52,7 @@ body {
   position: relative;
   width: 75%;
   margin: 1rem auto;
+  border: 3px solid black;
 }
 .save-button {
   position: absolute;
@@ -65,7 +66,16 @@ body {
   background-color: green;
   color: white;
 }
-
+.edit-buttion{
+  display:flex;
+  border: 1px solid grey;
+  padding: 5px 10px;
+  background-color: lightseagreen;
+}
+.edit-button:hover {
+  background-color: green;
+  color: white;
+}
 .home-button {
   padding: 5px 10px;
   background-color: lightskyblue;
