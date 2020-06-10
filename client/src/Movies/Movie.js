@@ -7,6 +7,14 @@ function Movie(props,{ addToSavedList }) {
   const [movie, setMovie] = useState(null);
   const params = useParams();
   const { push } = useHistory();
+  
+
+  const deleteMovie = () => {
+    axios
+    .delete(`http://localhost:5000/api/movies/${movie.id}`)
+    .then(res => push("/"))
+    .catch(err => console.log(err.message, err.response))
+  }
 
   const fetchMovie = (id) => {
     axios
@@ -27,25 +35,17 @@ function Movie(props,{ addToSavedList }) {
     return <div>Loading movie information...</div>;
   }
 
-  const deleteMovie = () => {
-    axios
-    .delete(`http://localhost:5000/api/movies/${params.id}`,)
-    .then(res => push("/"))
-    .then(res => props.getMovieList())
-    .catch(err => console.log(err.message, err.response))
-  }
-
   return (
     <div className="save-wrapper">
-      <MovieCard movie={movie} />
+      <MovieCard movie={movie} getMovieList/>
       
-      <div className="save-button" onClick={saveMovie}>
+      <button className="save-button" onClick={saveMovie}>
         Save
-      </div>
-      <button className="edit-buttion" onClick={()=> { push(`/update-movie/${movie.id}`)}}>
+      </button>
+      <button className="edit-button" onClick={()=> { push(`/update-movie/${movie.id}`)}}>
         Edit
       </button>
-      <button className="delete-buttion" onClick={deleteMovie}>
+      <button className="delete-button" onClick={deleteMovie}>
         Delete
       </button>
     </div>

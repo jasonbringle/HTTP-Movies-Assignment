@@ -6,7 +6,6 @@ export const FormDiv = styled.div`
   justify-content: space-between;
   height:100px;
   width: 300px;
-  border: 3px solid black;
 `
 export const FormHolder = styled.div`
   display:flex;
