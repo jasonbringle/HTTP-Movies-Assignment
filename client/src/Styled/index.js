@@ -5,7 +5,8 @@ export const FormDiv = styled.div`
   flex-direction:column;
   justify-content: space-between;
   height:100px;
-  /* border: 3px solid black; */
+  width: 300px;
+  border: 3px solid black;
 `
 export const FormHolder = styled.div`
   display:flex;
