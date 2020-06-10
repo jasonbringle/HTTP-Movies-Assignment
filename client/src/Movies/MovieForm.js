@@ -1,28 +1,46 @@
 import React, { useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom'
 import { FormDiv, FormHolder } from '../Styled';
 import axios from 'axios';
 
-export default function MovieForm(){
-    const [ updatedMovie, setUpdatedMovie ] = useState({
-        title: "",
-        director: "",
-        metascore: '',
-        stars: []
-    })
+const initial = {
+    id: '',
+    title: '',
+    director: '',
+    metascore: '',
+    stars: []
+    }
+
+export default function MovieForm(props){
+    const [ updatedMovie, setUpdatedMovie ] = useState(initial)
+
+    const  id   = useParams();
+    console.log(id)
+    const { push } = useHistory();
+
+    // const movie = props.movieList.find(
+    //     thing => `${thing.id}` === props.match.params.id
+    //   );
 
     const handleChange = e =>  {
         setUpdatedMovie({
             ...updatedMovie,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            id: id
             }
         )
     }
 
     const submitMovieEdit = e => {
+        setUpdatedMovie({
+            ...updatedMovie,
+            id: id
+        })
+        console.log(updatedMovie)
         e.preventDefault();
             axios
-            .put(`http://localhost/5000/api/movies/${updatedMovie.id}`, updatedMovie)
-            .then(res => console.log(res))
+            .put(`http://localhost:5000/api/movies/${id}`, updatedMovie)
+            .then(res => push("/"))
             .catch(err => console.error(err.message, err.response))
     }
 
